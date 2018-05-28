@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 struct Card {
     var shape: Shape
     var fill: Fill
@@ -30,10 +29,19 @@ struct Card {
         static let all = [solid, shaded, hollow]
     }
     
-    enum Color: String {
-        case purple = "purple"
-        case red = "red"
-        case green = "green"
+    enum Color {
+        case purple
+        case red
+        case green
+        
+        var color: UIColor {
+            switch self {
+            case .purple: return #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+            case .red: return #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+            case .green: return #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            }
+        }
+        
         static let all = [purple, red, green]
     }
     
@@ -42,7 +50,7 @@ struct Card {
         static let all = [one, two, three]
     }
     
-    init(withColor color: Color, withShape shape: Shape, withFill fill: Fill, withNumber number: Number) {
+    init(color: Color, shape: Shape, fill: Fill, number: Number) {
         self.color = color
         self.shape = shape
         self.fill = fill

@@ -14,16 +14,29 @@ class ViewController: UIViewController {
     private var selectedButtons = [UIButton]()
     private var replaceableButtonIndices = [Int]()
     
+    @IBOutlet private var cardButtons: [UIButton]!
     @IBOutlet weak var deal3ButtonOutlet: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateViewFromModel()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction func deal3Button(_ sender: UIButton) {
-        if (game.cardsOnTable.count + 3 <= 24) {
+        if (game.cardsOnTable.count + GameConstant.cardsToBeDealt <= 24) {
             game.dealMore(3)
         } else if (24 - game.cardsOnTable.count > 0) {
             game.dealMore(24 - game.cardsOnTable.count)
         }
         updateViewFromModel()
     }
+    
     @IBAction func newGameButton(_ sender: Any) {
         game = Set()
         selectedButtons = [UIButton]()
@@ -32,7 +45,7 @@ class ViewController: UIViewController {
         updateViewFromModel()
         hideExtraCards()
     }
-    @IBOutlet private var cardButtons: [UIButton]!
+    
     @IBAction func touchButton(_ sender: UIButton) {
         let buttonIndex = cardButtons.index(of: sender)!
         let scoreOfMove = game.chooseCard(at: buttonIndex)
@@ -41,15 +54,6 @@ class ViewController: UIViewController {
             updateViewFromModel()
         }
         scoreLabel.text = "Score: \(game.score)"
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateViewFromModel()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
     
     private func hideExtraCards() {
@@ -88,7 +92,7 @@ class ViewController: UIViewController {
     }
 
     private func getAttributedTitle(for card: Card) -> NSAttributedString {
-        var fill: CGFloat, color: UIColor, alpha: CGFloat
+        var fill: CGFloat, alpha: CGFloat
         var textToWrite = card.shape.rawValue
         switch card.fill {
         case .solid:
@@ -102,17 +106,13 @@ class ViewController: UIViewController {
             alpha = 1.0
         }
         
-        switch card.color {
-        case .purple: color = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-        case .red: color = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-        case .green: color = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-        }
-        
         switch card.number {
         case .two: textToWrite += " \(textToWrite)"
         case .three: textToWrite += " \(textToWrite) \(textToWrite)"
         default: break
         }
+        
+        let color = card.color.color
         let attributes: [NSAttributedStringKey: Any] = [
             .strokeColor: color,
             .strokeWidth: fill,
@@ -128,6 +128,7 @@ class ViewController: UIViewController {
         }
         if game.cardDeck.count <= 0 {
             deal3ButtonOutlet.isEnabled = false
+            deal3ButtonOutlet.alpha = 0.5
         }
     }
 }

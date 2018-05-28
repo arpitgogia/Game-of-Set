@@ -1,0 +1,16 @@
+PODS:
+  - EnumCollection (1.3.0)
+
+DEPENDENCIES:
+  - EnumCollection
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - EnumCollection
+
+SPEC CHECKSUMS:
+  EnumCollection: 7a67649af536f12cffd318ed0b2b63dd9a9a14d2
+
+PODFILE CHECKSUM: a8156662a92618e027772521f23950b19cc3bea8
+
+COCOAPODS: 1.5.3

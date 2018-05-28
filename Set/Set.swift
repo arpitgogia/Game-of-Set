@@ -40,7 +40,7 @@ class Set {
     }
     
     func dealMore(_ n: Int) {
-        for _ in 1...3 {
+        for _ in 1...n {
             if cardDeck.count > 0 {
                 cardsOnTable += [cardDeck.getRandomElement()]
             }
@@ -84,6 +84,10 @@ class Set {
     }
     
     static private func colorTest(card1: Card, card2: Card, card3: Card) -> Bool {
+        if card1 == card2 {
+            
+        }
+    
         if card1.color == card2.color && card2.color == card3.color {
             return true
         } else if card1.color != card2.color && card2.color != card3.color && card1.color != card3.color {
@@ -134,7 +138,7 @@ class Set {
             for fill in Card.Fill.all {
                 for number in Card.Number.all {
                     for shape in Card.Shape.all {
-                        cardDeck += [(Card(withColor: color, withShape: shape, withFill: fill, withNumber: number))]
+                        cardDeck += [(Card(color: color, shape: shape, fill: fill, number: number))]
                     }
                 }
             }
