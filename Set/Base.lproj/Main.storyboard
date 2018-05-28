@@ -325,7 +325,7 @@
                                 <rect key="frame" x="16" y="693" width="343" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSk-hn-Sa1">
-                                        <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="109" height="30"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="New Game">
                                             <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
@@ -335,13 +335,23 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8U-QF-0In">
-                                        <rect key="frame" x="175.66666666666663" y="0.0" width="167.33333333333337" height="30"/>
+                                        <rect key="frame" x="117" y="0.0" width="109" height="30"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Deal 3">
+                                        <state key="normal" title="Deal More">
                                             <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         </state>
                                         <connections>
                                             <action selector="deal3Button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EVZ-GU-zg3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2I-2G-diE">
+                                        <rect key="frame" x="234" y="0.0" width="109" height="30"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Hint">
+                                            <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hintButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ibT-VC-zdb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -367,7 +377,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="deal3ButtonOutlet" destination="j8U-QF-0In" id="d8V-OQ-xct"/>
+                        <outlet property="dealButton" destination="j8U-QF-0In" id="d8V-OQ-xct"/>
+                        <outlet property="hintButton" destination="E2I-2G-diE" id="AUW-H8-Bon"/>
+                        <outlet property="newGameButton" destination="iSk-hn-Sa1" id="Y74-eF-yCB"/>
                         <outlet property="scoreLabel" destination="cD1-qG-X9v" id="ksS-6f-BkY"/>
                         <outletCollection property="cardButtons" destination="Ynm-hW-vNu" collectionClass="NSMutableArray" id="RC6-P8-S5O"/>
                         <outletCollection property="cardButtons" destination="51h-xe-DjB" collectionClass="NSMutableArray" id="J7g-sp-ygW"/>

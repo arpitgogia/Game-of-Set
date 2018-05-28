@@ -4,7 +4,7 @@ platform :ios, '9.0'
 target 'Set' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  workspace 'Set'
   # Pods for Set
   pod 'EnumCollection'
   target 'SetTests' do
@@ -18,4 +18,3 @@ target 'Set' do
   end
 
 end
-workspace 'Set'

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import EnumCollection
 
 struct Card {
     var shape: Shape
@@ -15,21 +16,27 @@ struct Card {
     var color: Color
     var number: Number
     
-    enum Shape: String {
+    enum Shape: String, EnumCollection {
         case circle = "●"
         case triangle = "▲"
         case square = "■"
-        static let all = [circle, triangle, square]
     }
     
-    enum Fill: String {
+    enum Fill: String, EnumCollection {
         case solid = "solid"
         case shaded = "stripe"
         case hollow = "blank"
-        static let all = [solid, shaded, hollow]
+        
+        var fill: CGFloat {
+            switch self {
+            case .solid: return 0
+            case .shaded: return 1
+            case .hollow: return 5
+            }
+        }
     }
     
-    enum Color {
+    enum Color: EnumCollection {
         case purple
         case red
         case green
@@ -42,12 +49,10 @@ struct Card {
             }
         }
         
-        static let all = [purple, red, green]
     }
     
-    enum Number: Int {
+    enum Number: Int, EnumCollection {
         case one = 1, two, three
-        static let all = [one, two, three]
     }
     
     init(color: Color, shape: Shape, fill: Fill, number: Number) {

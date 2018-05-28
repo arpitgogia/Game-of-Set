@@ -7,13 +7,15 @@
 //
 
 import Foundation
-
-class Set {
+import UIKit
+class GameSet {
     private(set) var cardDeck = [Card]()
     
     private(set) var cardsOnTable = [Card]()
     
     private(set) var score = 0
+    
+    private(set) var hintSet = [Card]()
     
     let CARDS_SHOWN = 12
     let HIDDEN_CARDS = 12
@@ -47,6 +49,83 @@ class Set {
         }
     }
     
+    func getThirdCard(_ cards: [Card]) -> Card {
+        var thirdColor: Card.Color? = nil
+        var thirdNumber: Card.Number? = nil
+        var thirdFill: Card.Fill? = nil
+        var thirdShape: Card.Shape? = nil
+        
+        // Set third color
+        var presentColors = Set<Card.Color>()
+        
+        for card in cards {
+            presentColors.insert(card.color)
+        }
+        
+        if presentColors.count == 2 {
+            thirdColor = Set(Card.Color.allValues).subtracting(presentColors).first!
+        } else if presentColors.count == 1 {
+            thirdColor = presentColors.first!
+        }
+        
+        // Set third number
+        var presentNumbers = Set<Card.Number>()
+        
+        for card in cards {
+            presentNumbers.insert(card.number)
+        }
+        
+        if presentNumbers.count == 2 {
+            thirdNumber = Set(Card.Number.allValues).subtracting(presentNumbers).first!
+        } else if presentNumbers.count == 1 {
+            thirdNumber = presentNumbers.first!
+        }
+        
+        // Set third Fill
+        var presentFills = Set<Card.Fill>()
+        
+        for card in cards {
+            presentFills.insert(card.fill)
+        }
+        
+        if presentFills.count == 2 {
+            thirdFill = Set(Card.Fill.allValues).subtracting(presentFills).first!
+        } else if presentFills.count == 1 {
+            thirdFill = presentFills.first!
+        }
+        
+        // Set third Shape
+        var presentShapes = Set<Card.Shape>()
+        
+        for card in cards {
+            presentShapes.insert(card.shape)
+        }
+        
+        if presentShapes.count == 2 {
+            thirdShape = Set(Card.Shape.allValues).subtracting(presentShapes).first!
+        } else if presentShapes.count == 1 {
+            thirdShape = presentShapes.first!
+        }
+        
+        return Card(color: thirdColor!, shape: thirdShape!, fill: thirdFill!, number: thirdNumber!)
+    }
+    
+    func findSet() -> Bool {
+        var card3: Card? = nil
+        for card1 in cardsOnTable {
+            for card2 in cardsOnTable {
+                if card1 != card2 {
+                    card3 = getThirdCard([card1, card2])
+                    if cardsOnTable.contains(card3!)  {
+                        hintSet = [card1, card2, card3] as! [Card]
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+    
     func chooseCard(at index: Int) -> Int {
         if selectedCards.contains(cardsOnTable[index]) {
             selectedCards.remove(at: selectedCards.index(of: cardsOnTable[index])!)
@@ -56,14 +135,14 @@ class Set {
         selectedCards += [cardsOnTable[index]]
         
         if selectedCards.count == 3 {
-            if Set.checkIsSet(forCards: selectedCards) {
+            if GameSet.checkIsSet(forCards: selectedCards) {
                 for card in selectedCards {
                     if cardDeck.count > 0 {
                         cardsOnTable[cardsOnTable.index(of: card)!] = cardDeck.getRandomElement()
                     }
                 }
                 selectedCards.removeAll()
-//                draw()
+                //                draw()
                 score += 1
                 return 1
             } else {
@@ -87,7 +166,7 @@ class Set {
         if card1 == card2 {
             
         }
-    
+        
         if card1.color == card2.color && card2.color == card3.color {
             return true
         } else if card1.color != card2.color && card2.color != card3.color && card1.color != card3.color {
@@ -134,10 +213,10 @@ class Set {
     }
     
     init() {
-        for color in Card.Color.all {
-            for fill in Card.Fill.all {
-                for number in Card.Number.all {
-                    for shape in Card.Shape.all {
+        for color in Card.Color.allValues {
+            for fill in Card.Fill.allValues {
+                for number in Card.Number.allValues {
+                    for shape in Card.Shape.allValues {
                         cardDeck += [(Card(color: color, shape: shape, fill: fill, number: number))]
                     }
                 }
