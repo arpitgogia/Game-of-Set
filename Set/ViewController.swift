@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     
     @IBAction func hintButton(_ sender: UIButton) {
         let setFound = game.findSet()
-        print(setFound)
         if setFound {
             updateHintButtons()
         }

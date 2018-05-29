@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import EnumCollection
 
-struct Card {
+struct Card: Hashable {
     var shape: Shape
     var fill: Fill
     var color: Color
@@ -48,7 +48,6 @@ struct Card {
             case .green: return #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
             }
         }
-        
     }
     
     enum Number: Int, EnumCollection {
@@ -63,7 +62,7 @@ struct Card {
     }
 }
 
-extension Card: Equatable {
+extension Card {
     static func ==(lhs: Card, rhs: Card) -> Bool {
         return (lhs.color == rhs.color) &&
             (lhs.shape == rhs.shape) &&

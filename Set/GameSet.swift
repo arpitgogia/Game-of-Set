@@ -7,7 +7,25 @@
 //
 
 import Foundation
+import EnumCollection
 import UIKit
+
+extension Set where Element: EnumCollection  {
+    func getProperty() -> Element {
+        var presentElements = Set<Element>()
+        
+        for element in self {
+            presentElements.insert(element)
+        }
+        
+        if presentElements.count == 2 {
+            return Set(Element.allValues).subtracting(presentElements).first!
+        } else {
+            return presentElements.first!
+        }
+    }
+}
+
 class GameSet {
     private(set) var cardDeck = [Card]()
     
@@ -16,9 +34,6 @@ class GameSet {
     private(set) var score = 0
     
     private(set) var hintSet = [Card]()
-    
-    let CARDS_SHOWN = 12
-    let HIDDEN_CARDS = 12
     
     var selectedCards = [Card]()
     var replaceableCards = [Int]()
@@ -50,73 +65,21 @@ class GameSet {
     }
     
     func getThirdCard(_ cards: [Card]) -> Card {
-        var thirdColor: Card.Color? = nil
-        var thirdNumber: Card.Number? = nil
-        var thirdFill: Card.Fill? = nil
-        var thirdShape: Card.Shape? = nil
-        
-        // Set third color
-        var presentColors = Set<Card.Color>()
-        
-        for card in cards {
-            presentColors.insert(card.color)
-        }
-        
-        if presentColors.count == 2 {
-            thirdColor = Set(Card.Color.allValues).subtracting(presentColors).first!
-        } else if presentColors.count == 1 {
-            thirdColor = presentColors.first!
-        }
-        
-        // Set third number
-        var presentNumbers = Set<Card.Number>()
-        
-        for card in cards {
-            presentNumbers.insert(card.number)
-        }
-        
-        if presentNumbers.count == 2 {
-            thirdNumber = Set(Card.Number.allValues).subtracting(presentNumbers).first!
-        } else if presentNumbers.count == 1 {
-            thirdNumber = presentNumbers.first!
-        }
-        
-        // Set third Fill
-        var presentFills = Set<Card.Fill>()
-        
-        for card in cards {
-            presentFills.insert(card.fill)
-        }
-        
-        if presentFills.count == 2 {
-            thirdFill = Set(Card.Fill.allValues).subtracting(presentFills).first!
-        } else if presentFills.count == 1 {
-            thirdFill = presentFills.first!
-        }
-        
-        // Set third Shape
-        var presentShapes = Set<Card.Shape>()
-        
-        for card in cards {
-            presentShapes.insert(card.shape)
-        }
-        
-        if presentShapes.count == 2 {
-            thirdShape = Set(Card.Shape.allValues).subtracting(presentShapes).first!
-        } else if presentShapes.count == 1 {
-            thirdShape = presentShapes.first!
-        }
-        
-        return Card(color: thirdColor!, shape: thirdShape!, fill: thirdFill!, number: thirdNumber!)
+        let thirdColor = Set(cards.map({$0.color})).getProperty()
+        let thirdNumber = Set(cards.map({$0.number})).getProperty()
+        let thirdFill = Set(cards.map({$0.fill})).getProperty()
+        let thirdShape = Set(cards.map({$0.shape})).getProperty()
+
+        return Card(color: thirdColor, shape: thirdShape, fill: thirdFill, number: thirdNumber)
     }
     
     func findSet() -> Bool {
-        var card3: Card? = nil
+        var card3: Card!
         for card1 in cardsOnTable {
             for card2 in cardsOnTable {
                 if card1 != card2 {
                     card3 = getThirdCard([card1, card2])
-                    if cardsOnTable.contains(card3!)  {
+                    if cardsOnTable.contains(card3) {
                         hintSet = [card1, card2, card3] as! [Card]
                         return true
                     }
