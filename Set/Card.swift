@@ -17,9 +17,9 @@ struct Card: Hashable {
     var number: Number
     
     enum Shape: String, EnumCollection {
-        case circle = "●"
-        case triangle = "▲"
-        case square = "■"
+        case diamond = "diamond"
+        case squiggle = "squiggle"
+        case pill = "pill"
     }
     
     enum Fill: String, EnumCollection {

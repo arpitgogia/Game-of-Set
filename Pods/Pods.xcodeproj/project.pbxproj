@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -52,11 +52,11 @@
 		05350046D8DD8792F1C34C99073C10F8 /* EnumCollection.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EnumCollection.xcconfig; sourceTree = "<group>"; };
 		08324E96405CE63B7CE4B9A991F0CDEA /* Pods-SetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SetTests.release.xcconfig"; sourceTree = "<group>"; };
 		120C66917FF1AFF0A551D23C3DE91838 /* Pods-SetUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SetUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		18B48920E749A215D2E73998E57EE9C8 /* Pods_SetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SetTests.framework; path = "Pods-SetTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18B48920E749A215D2E73998E57EE9C8 /* Pods_SetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		217A5CAB334C5FEBBE0C462DB2A745E8 /* Pods-SetTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SetTests-frameworks.sh"; sourceTree = "<group>"; };
 		3B1920B90105257A228C334CA3592640 /* EnumCollection-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EnumCollection-prefix.pch"; sourceTree = "<group>"; };
 		4A2FBF271B6A35B409D7EAD9E701A953 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		59DF0201AF407F4D4DBA4EAE6C31B775 /* EnumCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = EnumCollection.framework; path = EnumCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59DF0201AF407F4D4DBA4EAE6C31B775 /* EnumCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnumCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5AC81B9F1B012A480A528F8915D48219 /* Pods-SetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SetTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5C2C634A2B4CEEC293DE63230E32EAFC /* Pods-SetUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SetUITests-resources.sh"; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		8CCC605F9BD3032A920F0AB178C356F3 /* Pods-SetUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SetUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		90E5B0C1A059E53312BBC3A29C1576D1 /* Pods-Set.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Set.debug.xcconfig"; sourceTree = "<group>"; };
 		92272AB0B06BA5A6A0C8C6C55A6234AF /* Pods-Set-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Set-dummy.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94D937506D32DB8762DAF68933993305 /* Pods-SetTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SetTests-dummy.m"; sourceTree = "<group>"; };
 		9A39F34F8CB3860239EFF4F6C2346679 /* Pods-Set-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Set-frameworks.sh"; sourceTree = "<group>"; };
 		9A80E9D2CE1BD3DC9F0D4280388597D0 /* Pods-SetTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SetTests.modulemap"; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		B8EAD4910E6FBE35440FB7A5488B7FF7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBC1D73A2FFC184249C94325C64B4A88 /* Pods-Set-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Set-resources.sh"; sourceTree = "<group>"; };
 		BC671C1B8BF3B6BB7ECDDC6D3582CBDC /* EnumCollection.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = EnumCollection.modulemap; sourceTree = "<group>"; };
-		C481AFEB3C1FDEF479274D98F26C809C /* Pods_Set.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Set.framework; path = "Pods-Set.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C481AFEB3C1FDEF479274D98F26C809C /* Pods_Set.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Set.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB677BAECA18BF2C2E5BAE7B084C1705 /* Pods-SetUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SetUITests.modulemap"; sourceTree = "<group>"; };
 		CD3867791C04DB15E50B05F80E8EF82B /* Pods-SetTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SetTests-resources.sh"; sourceTree = "<group>"; };
 		D41511B9DDDBBB9D159ACC0B290A2EE8 /* Pods-SetUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SetUITests-frameworks.sh"; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		D8C8837946E18020F9A493FEF1184A26 /* Pods-Set.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Set.modulemap"; sourceTree = "<group>"; };
 		E2928AAB65E5CC62C35133800AF99C41 /* Pods-Set-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Set-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E41CD066953CB8652EAC4AD23DC5E79C /* EnumCollection-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EnumCollection-umbrella.h"; sourceTree = "<group>"; };
-		EB061EAC55B782EB532E9AB1B1A68B09 /* Pods_SetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SetUITests.framework; path = "Pods-SetUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB061EAC55B782EB532E9AB1B1A68B09 /* Pods_SetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8A17EDDAC9A4EF9B9D826FDB9C59E7 /* Pods-Set.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Set.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +156,6 @@
 				034A5DB2EEFAAADAAD23D7A4EE67948D /* EnumCollection.swift */,
 				AE502064E19EBF3679243FE34C5B5080 /* Support Files */,
 			);
-			name = EnumCollection;
 			path = EnumCollection;
 			sourceTree = "<group>";
 		};
@@ -542,11 +541,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-SetUITests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-SetUITests/Pods-SetUITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -580,11 +575,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Set/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Set/Pods-Set.modulemap";
 				OTHER_LDFLAGS = "";
@@ -619,11 +610,7 @@
 				INFOPLIST_FILE = "Target Support Files/EnumCollection/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/EnumCollection/EnumCollection.modulemap";
 				PRODUCT_MODULE_NAME = EnumCollection;
 				PRODUCT_NAME = EnumCollection;
@@ -656,11 +643,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-SetUITests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-SetUITests/Pods-SetUITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -693,11 +676,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-SetTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-SetTests/Pods-SetTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -731,11 +710,7 @@
 				INFOPLIST_FILE = "Target Support Files/EnumCollection/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/EnumCollection/EnumCollection.modulemap";
 				PRODUCT_MODULE_NAME = EnumCollection;
 				PRODUCT_NAME = EnumCollection;
@@ -767,11 +742,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-SetTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-SetTests/Pods-SetTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -804,11 +775,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Set/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Set/Pods-Set.modulemap";
 				OTHER_LDFLAGS = "";

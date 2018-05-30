@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		36C679B469200CB06AD1FDC4 /* Pods_SetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9632B2491A45F8BB0294957F /* Pods_SetUITests.framework */; };
 		53B64B54E90777DC1FE72AA2 /* Pods_Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766DF4634572AB9456BC3CB5 /* Pods_Set.framework */; };
-		9C6E36C120B831E300CF5ACC /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E36C020B831E300CF5ACC /* GameConstants.swift */; };
+		9C6E36C120B831E300CF5ACC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E36C020B831E300CF5ACC /* Constants.swift */; };
 		9C74121020BD369F00E280DD /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C74120F20BD369F00E280DD /* Grid.swift */; };
+		9C74121A20BD68C400E280DD /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C74121920BD68C400E280DD /* CardView.swift */; };
 		9C83BEB120B6CC47008D173A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C83BEB020B6CC47008D173A /* AppDelegate.swift */; };
 		9C83BEB320B6CC47008D173A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C83BEB220B6CC47008D173A /* ViewController.swift */; };
 		9C83BEB620B6CC47008D173A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C83BEB420B6CC47008D173A /* Main.storyboard */; };
@@ -47,8 +48,9 @@
 		766DF4634572AB9456BC3CB5 /* Pods_Set.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Set.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		869018DA2149C66D98599271 /* Pods-Set.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Set.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Set/Pods-Set.debug.xcconfig"; sourceTree = "<group>"; };
 		9632B2491A45F8BB0294957F /* Pods_SetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C6E36C020B831E300CF5ACC /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
+		9C6E36C020B831E300CF5ACC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9C74120F20BD369F00E280DD /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		9C74121920BD68C400E280DD /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		9C83BEAD20B6CC47008D173A /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C83BEB020B6CC47008D173A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C83BEB220B6CC47008D173A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = /Users/arpitgogia/Projects/Set/Set/ViewController.swift; sourceTree = "<absolute>"; };
@@ -124,8 +126,9 @@
 			children = (
 				9C83BEDF20B6CCAF008D173A /* Supporting Files */,
 				9C83BEB220B6CC47008D173A /* ViewController.swift */,
-				9C6E36C020B831E300CF5ACC /* GameConstants.swift */,
+				9C6E36C020B831E300CF5ACC /* Constants.swift */,
 				9C83BEB420B6CC47008D173A /* Main.storyboard */,
+				9C74121920BD68C400E280DD /* CardView.swift */,
 				9C83BEBC20B6CC48008D173A /* Info.plist */,
 				9C83BEE120B6CCD9008D173A /* Card.swift */,
 				9C83BEE320B6D991008D173A /* GameSet.swift */,
@@ -395,11 +398,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C74121A20BD68C400E280DD /* CardView.swift in Sources */,
 				9C83BEE420B6D991008D173A /* GameSet.swift in Sources */,
 				9C83BEB320B6CC47008D173A /* ViewController.swift in Sources */,
 				9C83BEE220B6CCD9008D173A /* Card.swift in Sources */,
 				9C83BEB120B6CC47008D173A /* AppDelegate.swift in Sources */,
-				9C6E36C120B831E300CF5ACC /* GameConstants.swift in Sources */,
+				9C6E36C120B831E300CF5ACC /* Constants.swift in Sources */,
 				9C74121020BD369F00E280DD /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

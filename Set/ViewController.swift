@@ -29,21 +29,21 @@ class ViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addCornerRadius()
-        updateViewFromModel()
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+////        addCornerRadius()
+////        updateViewFromModel()
+//    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     @IBAction func deal3Button(_ sender: UIButton) {
-        if (game.cardsOnTable.count + GameConstants.cardsToBeDealt <= GameConstants.maxNumberOfCardsOnBoard) {
-            game.dealMore(GameConstants.cardsToBeDealt)
-        } else if (GameConstants.maxNumberOfCardsOnBoard - game.cardsOnTable.count > 0) {
-            game.dealMore(GameConstants.maxNumberOfCardsOnBoard - game.cardsOnTable.count)
+        if (game.cardsOnTable.count + Constants.Game.cardsToBeDealt <= Constants.Game.maxNumberOfCardsOnBoard) {
+            game.dealMore(Constants.Game.cardsToBeDealt)
+        } else if (Constants.Game.maxNumberOfCardsOnBoard - game.cardsOnTable.count > 0) {
+            game.dealMore(Constants.Game.maxNumberOfCardsOnBoard - game.cardsOnTable.count)
         }
         updateViewFromModel()
     }
@@ -71,8 +71,8 @@ class ViewController: UIViewController {
     }
     
     private func hideExtraCards() {
-        if game.cardsOnTable.count == GameConstants.initialNumberOfCards {
-            for index in GameConstants.initialNumberOfCards..<GameConstants.maxNumberOfCardsOnBoard {
+        if game.cardsOnTable.count == Constants.Game.initialNumberOfCards {
+            for index in Constants.Game.initialNumberOfCards..<Constants.Game.maxNumberOfCardsOnBoard {
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0)
                 cardButtons[index].setAttributedTitle(NSAttributedString(string: ""), for: UIControlState.normal)
             }
@@ -89,8 +89,8 @@ class ViewController: UIViewController {
             return
         }
         selectedButtons.append(button)
-        if selectedButtons.count == GameConstants.numberOfCardsInSet {
-            if scoreOfMove == GameConstants.successfulSetScore {
+        if selectedButtons.count == Constants.Game.numberOfCardsInSet {
+            if scoreOfMove == Constants.Game.successfulSetScore {
                 for card in selectedButtons {
                     card.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0)
                     card.setAttributedTitle(NSAttributedString(string: ""), for: UIControlState.normal)
@@ -102,7 +102,7 @@ class ViewController: UIViewController {
                 }
             }
             selectedButtons.removeAll()
-        } else if selectedButtons.count < GameConstants.numberOfCardsInSet {
+        } else if selectedButtons.count < Constants.Game.numberOfCardsInSet {
             button.layer.borderWidth = 3.0
             button.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         }
@@ -167,10 +167,10 @@ class ViewController: UIViewController {
     
     func addCornerRadius() {
         for button in cardButtons {
-            button.layer.cornerRadius = CGFloat(GameConstants.buttonCornerRadius)
+            button.layer.cornerRadius = CGFloat(Constants.Game.buttonCornerRadius)
         }
-        dealButton.layer.cornerRadius = CGFloat(GameConstants.buttonCornerRadius)
-        newGameButton.layer.cornerRadius = CGFloat(GameConstants.buttonCornerRadius)
-        hintButton.layer.cornerRadius = CGFloat(GameConstants.buttonCornerRadius)
+        dealButton.layer.cornerRadius = CGFloat(Constants.Game.buttonCornerRadius)
+        newGameButton.layer.cornerRadius = CGFloat(Constants.Game.buttonCornerRadius)
+        hintButton.layer.cornerRadius = CGFloat(Constants.Game.buttonCornerRadius)
     }
 }
