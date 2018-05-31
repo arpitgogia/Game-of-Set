@@ -41,4 +41,8 @@ struct Constants {
         
         static let symbolGap: Float = 20.0
     }
+    
+    struct GridUI {
+        static let gridInsetMeasure = 10.0
+    }
 }

@@ -8,10 +8,8 @@
 
 import UIKit
 
-@IBDesignable
 class CardView: UIView {
     
-    @IBInspectable
     var shape: String = "pill" {
         didSet {
             setNeedsDisplay()
@@ -19,7 +17,6 @@ class CardView: UIView {
         }
     }
 
-    @IBInspectable
     var count: Int = 3 {
         didSet {
             setNeedsDisplay()
@@ -27,7 +24,6 @@ class CardView: UIView {
         }
     }
 
-    @IBInspectable
     var fillStyle: String = "hollow" {
         didSet {
             setNeedsDisplay()
@@ -35,7 +31,6 @@ class CardView: UIView {
         }
     }
 
-    @IBInspectable
     var color: UIColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) {
         didSet {
             setNeedsDisplay()
@@ -43,12 +38,16 @@ class CardView: UIView {
         }
     }
     
-    @IBInspectable
-    var isSelected: Bool = true {
+    var isSelected: Bool = false {
         didSet {
             setNeedsDisplay()
             setNeedsLayout()
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setNeedsDisplay()
+        setNeedsLayout()
     }
     
     private func drawPill(currentPath: UIBezierPath?, center: CGPoint) -> UIBezierPath {
@@ -118,7 +117,7 @@ class CardView: UIView {
         return path
     }
     
-    private func setProperties( path: inout UIBezierPath, fillStyle: String, color: UIColor) {
+    private func setProperties(path: inout UIBezierPath, fillStyle: String, color: UIColor) {
         if fillStyle == Card.Fill.solid.rawValue {
             color.setFill()
             path.fill()
@@ -127,6 +126,7 @@ class CardView: UIView {
         }
         color.setStroke()
         path.stroke()
+        path.apply(CGAffineTransform(scaleX: 0.2, y: 0.2))
     }
     
     private func drawSymbols(parent: CGRect, shape: String, number: Int, fillStyle: String, color: UIColor) {
@@ -165,6 +165,7 @@ class CardView: UIView {
             path.addClip()
         }
         setProperties(path: &path, fillStyle: fillStyle, color: color)
+        
     }
     
     override func draw(_ rect: CGRect) {
@@ -178,7 +179,7 @@ class CardView: UIView {
             roundedRect.lineWidth = 5.0
             roundedRect.stroke()
         }
-        
+        print(roundedRect.bounds)
         drawSymbols(parent: roundedRect.bounds, shape: shape, number: count, fillStyle: fillStyle, color: color)
     }
 }
