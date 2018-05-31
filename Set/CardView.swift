@@ -8,37 +8,32 @@
 
 import UIKit
 
-class CardView: UIView {
-    
-    var shape: String = "pill" {
-        didSet {
-            setNeedsDisplay()
-            setNeedsLayout()
-        }
-    }
-
-    var count: Int = 3 {
-        didSet {
-            setNeedsDisplay()
-            setNeedsLayout()
-        }
-    }
-
-    var fillStyle: String = "hollow" {
-        didSet {
-            setNeedsDisplay()
-            setNeedsLayout()
-        }
-    }
-
-    var color: UIColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1) {
-        didSet {
-            setNeedsDisplay()
-            setNeedsLayout()
-        }
+class CardView: UIControl {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
-    var isSelected: Bool = false {
+    convenience init(frame: CGRect, card: Card) {
+        self.init(frame: frame)
+        self.shape = card.shape.rawValue
+        self.count = card.number.rawValue
+        self.fillStyle = card.fill.rawValue
+        self.color = card.color.color
+        
+        setNeedsLayout()
+        setNeedsDisplay()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private var shape: String!
+    private var count: Int!
+    private var fillStyle: String!
+    private var color: UIColor!
+    
+    override var isSelected: Bool {
         didSet {
             setNeedsDisplay()
             setNeedsLayout()
@@ -57,39 +52,46 @@ class CardView: UIView {
         setNeedsLayout()
     }
     
-    private func drawPill(currentPath: UIBezierPath?, center: CGPoint) -> UIBezierPath {
+    private func drawPill(parent: CGRect, currentPath: UIBezierPath?, center: CGPoint) -> UIBezierPath {
+        let pillSideLength = parent.size.width / 3
+        let radius = parent.size.height / 8
         let path: UIBezierPath?
         if currentPath != nil {
             path = currentPath
         } else {
             path = UIBezierPath()
         }
-        let start = center.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.pillSideLength/2), y: CGFloat(-Constants.CardUI.radius)))
+        
+        let start = center.applying(CGAffineTransform(translationX: CGFloat(-pillSideLength/2), y: CGFloat(-radius)))
         path?.move(to: start)
-        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(Constants.CardUI.sideLength), y: 0)))!)
-        path?.addArc(withCenter: (path?.currentPoint.applying(CGAffineTransform(translationX: 0, y: CGFloat(Constants.CardUI.radius))))!, radius: CGFloat(Constants.CardUI.radius), startAngle: 3 * CGFloat.pi / 2, endAngle: CGFloat.pi / 2, clockwise: true)
-        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.sideLength), y: 0)))!)
-        path?.addArc(withCenter: (path?.currentPoint.applying(CGAffineTransform(translationX: 0, y: CGFloat(-Constants.CardUI.radius))))!, radius: CGFloat(Constants.CardUI.radius), startAngle: CGFloat.pi / 2, endAngle: 3 * CGFloat.pi / 2, clockwise: true)
+        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(pillSideLength), y: 0)))!)
+        path?.addArc(withCenter: (path?.currentPoint.applying(CGAffineTransform(translationX: 0, y: CGFloat(radius))))!, radius: CGFloat(radius), startAngle: 3 * CGFloat.pi / 2, endAngle: CGFloat.pi / 2, clockwise: true)
+        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(-pillSideLength), y: 0)))!)
+        path?.addArc(withCenter: (path?.currentPoint.applying(CGAffineTransform(translationX: 0, y: CGFloat(-radius))))!, radius: CGFloat(radius), startAngle: CGFloat.pi / 2, endAngle: 3 * CGFloat.pi / 2, clockwise: true)
         return path!
     }
     
-    private func drawDiamond(currentPath: UIBezierPath?, center: CGPoint) -> UIBezierPath {
+    private func drawDiamond(parent: CGRect, currentPath: UIBezierPath?, center: CGPoint) -> UIBezierPath {
+        let semiMajorAxis = parent.size.width / 3
+        let semiMinorAxis = parent.size.height / 8
         let path: UIBezierPath?
         if currentPath != nil {
             path = currentPath
         } else {
             path = UIBezierPath()
         }
-        let start = center.applying(CGAffineTransform(translationX: 0, y: CGFloat(-Constants.CardUI.semiMinorAxis)))
+        let start = center.applying(CGAffineTransform(translationX: 0, y: CGFloat(-semiMinorAxis)))
         path?.move(to: start)
-        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(Constants.CardUI.semiMajorAxis), y: CGFloat(Constants.CardUI.semiMinorAxis))))!)
-        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.semiMajorAxis), y: CGFloat(Constants.CardUI.semiMinorAxis))))!)
-        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.semiMajorAxis), y: CGFloat(-Constants.CardUI.semiMinorAxis))))!)
+        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(semiMajorAxis), y: CGFloat(semiMinorAxis))))!)
+        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(-semiMajorAxis), y: CGFloat(semiMinorAxis))))!)
+        path?.addLine(to: (path?.currentPoint.applying(CGAffineTransform(translationX: CGFloat(-semiMajorAxis), y: CGFloat(-semiMinorAxis))))!)
         path?.close()
         return path!
     }
     
-    private func drawSquiggle(currentPath: UIBezierPath?, center: CGPoint) -> UIBezierPath {
+    private func drawSquiggle(parent: CGRect, currentPath: UIBezierPath?, center: CGPoint) -> UIBezierPath {
+        let semiMajorAxis = parent.size.width / 3
+        let semiMinorAxis = parent.size.height / 8
         let path: UIBezierPath?
         if currentPath != nil {
             path = currentPath
@@ -97,18 +99,18 @@ class CardView: UIView {
             path = UIBezierPath()
         }
         
-        let start = center.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.semiMajorAxis), y: CGFloat(Constants.CardUI.semiMinorAxis)))
+        let start = center.applying(CGAffineTransform(translationX: CGFloat(-semiMajorAxis), y: CGFloat(semiMinorAxis)))
         path?.move(to: start)
 
         //Upper Half
-        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: 0, y: CGFloat(-Constants.CardUI.semiMinorAxis/2))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.semiMajorAxis/2), y: CGFloat(-Constants.CardUI.semiMinorAxis))))
+        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: 0, y: CGFloat(-semiMinorAxis/2))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(-semiMajorAxis/2), y: CGFloat(-semiMinorAxis))))
         
-        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: CGFloat(Constants.CardUI.semiMajorAxis), y: CGFloat(-Constants.CardUI.semiMinorAxis))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(Constants.CardUI.semiMajorAxis/2), y: 0)))
+        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: CGFloat(semiMajorAxis), y: CGFloat(-semiMinorAxis))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(semiMajorAxis/2), y: 0)))
         
         //Lower Half
-        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: 0, y: CGFloat(Constants.CardUI.semiMinorAxis/2))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(Constants.CardUI.semiMajorAxis/2), y: CGFloat(Constants.CardUI.semiMinorAxis))))
+        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: 0, y: CGFloat(semiMinorAxis/2))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(semiMajorAxis/2), y: CGFloat(semiMinorAxis))))
         
-        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.semiMajorAxis), y: CGFloat(Constants.CardUI.semiMinorAxis))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(-Constants.CardUI.semiMajorAxis/2), y: 0)))
+        path?.addQuadCurve(to: center.applying(CGAffineTransform(translationX: CGFloat(-semiMajorAxis), y: CGFloat(semiMinorAxis))), controlPoint: center.applying(CGAffineTransform(translationX: CGFloat(-semiMajorAxis/2), y: 0)))
         
         return path!
     }
@@ -121,6 +123,7 @@ class CardView: UIView {
             path.addLine(to: startOfLine.applying(CGAffineTransform(translationX: 0, y: pathBounds.size.height)))
             startOfLine = startOfLine.applying(CGAffineTransform(translationX: CGFloat(Constants.CardUI.stripeGap), y: 0))
         }
+        
         return path
     }
     
@@ -134,44 +137,6 @@ class CardView: UIView {
         color.setStroke()
         path.stroke()
         path.apply(CGAffineTransform(scaleX: 0.2, y: 0.2))
-    }
-    
-    private func drawSymbols(parent: CGRect, shape: String, number: Int, fillStyle: String, color: UIColor) {
-        var shapeDrawer: (UIBezierPath?, CGPoint) -> UIBezierPath?
-        switch shape {
-        case Card.Shape.diamond.rawValue:
-            shapeDrawer = drawDiamond
-        case Card.Shape.pill.rawValue:
-            shapeDrawer = drawPill
-        case Card.Shape.squiggle.rawValue:
-            shapeDrawer = drawSquiggle
-        default:
-            shapeDrawer = drawDiamond
-        }
-        
-        
-        var startPoint = CGPoint()
-        
-        switch number {
-        case Card.Number.one.rawValue:
-            startPoint = CGPoint(x: parent.midX, y: parent.midY)
-        case Card.Number.two.rawValue:
-            startPoint = CGPoint(x: parent.midX, y: parent.midY - CGFloat(Constants.CardUI.symbolGap))
-        case Card.Number.three.rawValue:
-            startPoint = CGPoint(x: parent.midX, y: parent.midY - CGFloat(Constants.CardUI.majorAxis - Constants.CardUI.symbolGap))
-        default:
-            startPoint = CGPoint(x: parent.midX, y: parent.midY)
-        }
-        
-        var path = UIBezierPath()
-        for _ in 1...number {
-            path = shapeDrawer(path, startPoint)!
-            startPoint = startPoint.applying(CGAffineTransform(translationX: 0, y: CGFloat(Constants.CardUI.symbolGap + Constants.CardUI.minorAxis)))
-        }
-        if fillStyle == Card.Fill.shaded.rawValue {
-            path.addClip()
-        }
-        setProperties(path: &path, fillStyle: fillStyle, color: color)
     }
     
     func select() {
@@ -209,6 +174,54 @@ class CardView: UIView {
             roundedRect.stroke()
         }
         
-        drawSymbols(parent: roundedRect.bounds, shape: shape, number: count, fillStyle: fillStyle, color: color)
+        drawSymbols(parent: bounds, shape: shape, number: count, fillStyle: fillStyle, color: color)
+        
+    }
+    
+    // Helpers
+    
+    
+    private func drawSymbols(parent: CGRect, shape: String, number: Int, fillStyle: String, color: UIColor) {
+        let symbolGap: Float = 1.0
+        let translationDistance: Float = Float(parent.width / 2.0)
+        
+        
+        var shapeDrawer: (CGRect, UIBezierPath?, CGPoint) -> UIBezierPath?
+        switch shape {
+        case Card.Shape.diamond.rawValue:
+            shapeDrawer = drawDiamond
+        case Card.Shape.pill.rawValue:
+            shapeDrawer = drawPill
+        case Card.Shape.squiggle.rawValue:
+            shapeDrawer = drawSquiggle
+        default:
+            shapeDrawer = drawDiamond
+        }
+        
+        
+        var startingCenter = CGPoint()
+        
+        switch number {
+        case Card.Number.one.rawValue:
+            startingCenter = CGPoint(x: parent.midX, y: parent.midY)
+        case Card.Number.two.rawValue:
+            startingCenter = CGPoint(x: parent.midX, y: parent.midY - CGFloat(translationDistance - symbolGap))
+        case Card.Number.three.rawValue:
+            startingCenter = CGPoint(x: parent.midX, y: parent.midY - CGFloat(translationDistance - symbolGap))
+        default:
+            startingCenter = CGPoint(x: parent.midX, y: parent.midY)
+        }
+        
+        var path = UIBezierPath()
+        for _ in 1...number {
+            path = shapeDrawer(parent, path, startingCenter)!
+            var yTranslation = CGFloat(symbolGap + Float(parent.width/2))
+            yTranslation = number == Card.Number.two.rawValue ? 2 * yTranslation : yTranslation
+            startingCenter = startingCenter.applying(CGAffineTransform(translationX: 0, y: yTranslation))
+        }
+        if fillStyle == Card.Fill.shaded.rawValue {
+            path.addClip()
+        }
+        setProperties(path: &path, fillStyle: fillStyle, color: color)
     }
 }

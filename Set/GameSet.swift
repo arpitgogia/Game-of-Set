@@ -57,7 +57,7 @@ class GameSet {
     }
     
     func dealMore(_ n: Int) {
-        if n < 0 {
+        if n <= 0 {
             return
         }
         for _ in 1...n {

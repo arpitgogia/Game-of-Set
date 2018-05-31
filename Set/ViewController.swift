@@ -73,26 +73,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func setCard(card: Card, indexOf subView: Int) {
         let gridRect = grid[subView]!
-        let cardView = CardView(frame: gridRect.insetBy(dx: CGFloat(gridRect.size.width/15), dy: CGFloat(gridRect.size.height/15)))
-        cardView.color = card.color.color
-        cardView.count = card.number.rawValue
-        cardView.fillStyle = card.fill.rawValue
-        cardView.shape = card.shape.rawValue
+        let cardView = CardView(frame: gridRect.insetBy(dx: 4, dy: 4), card: card)
         
         cardGridView.addSubview(cardView)
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapCard))
-        tapGestureRecognizer.delegate = self as UIGestureRecognizerDelegate
-        cardView.addGestureRecognizer(tapGestureRecognizer)
+        cardView.addTarget(self, action:  #selector(tapCard), for: .touchUpInside)
         cardViews.append(cardView)
     }
     
-    private func getCardIndex(_ sender: UITapGestureRecognizer) -> Int {
+    private func getCardIndex(_ cardView: CardView) -> Int {
         for (index, card) in cardViews.enumerated() {
-            if card.isEqual(sender.view as! CardView) {
+            
+            if card.isEqual(cardView) {
                 return index
             }
         }
-        return -1
+
+        fatalError()
     }
     
     private func selectCard(_ index: Int) {
@@ -132,23 +128,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc private func tapCard(_ sender: UITapGestureRecognizer) {
-        switch sender.state {
-        case .ended:
-            selectCard(getCardIndex(sender))
-        default:
-            print("Shit!")
-        }
+    @objc private func tapCard(_ sender: CardView) {
+        selectCard(getCardIndex(sender))
     }
     
     private func disableDeal() {
         dealButton.isEnabled = false
-//        dealButton.titleLabel?.alpha = 0.2
+        dealButton.alpha = 0.2
     }
     
     private func enableDeal() {
         dealButton.isEnabled = true
-        dealButton.titleLabel?.alpha = 1.0
+        dealButton.alpha = 1.0
     }
     
     @objc private func dealMore() {
@@ -172,7 +163,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func updateViewFromModel() {
         grid = newGrid()
-        cardGridView.subviews.forEach({$0.removeFromSuperview()})
+        cardGridView.subviews.forEach({ $0.removeFromSuperview() })
         cardViews = [CardView]()
         for (index, card) in game.cardsOnTable.enumerated() {
             setCard(card: card, indexOf: index)

@@ -25,7 +25,6 @@ struct Constants {
     struct CardUI {
         static let sideLength: Float = 50.0
         static let radius: Float = 25.0
-        static let pillSideLength: Float = 50.0
         static let arcRadius: Float = 25.0
         static let stripeGap: Float = 5.0
         
@@ -40,7 +39,7 @@ struct Constants {
             return minorAxis / 2.0
         }
         
-        static let symbolGap: Float = 20.0
+        static let symbolGap: Float = 1.0
     }
     
     struct GridUI {
