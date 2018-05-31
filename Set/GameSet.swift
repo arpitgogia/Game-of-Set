@@ -57,6 +57,9 @@ class GameSet {
     }
     
     func dealMore(_ n: Int) {
+        if n < 0 {
+            return
+        }
         for _ in 1...n {
             if cardDeck.count > 0 {
                 cardsOnTable += [cardDeck.getRandomElement()]
@@ -74,6 +77,7 @@ class GameSet {
     }
     
     func findSet() -> Bool {
+        selectedCards.removeAll()
         var card3: Card!
         for card1 in cardsOnTable {
             for card2 in cardsOnTable {
@@ -100,12 +104,14 @@ class GameSet {
         if selectedCards.count == 3 {
             if GameSet.checkIsSet(forCards: selectedCards) {
                 for card in selectedCards {
+                    let index = cardsOnTable.index(of: card)
                     if cardDeck.count > 0 {
-                        cardsOnTable[cardsOnTable.index(of: card)!] = cardDeck.getRandomElement()
+                        cardsOnTable[index!] = cardDeck.getRandomElement()
+                    } else {
+                        cardsOnTable.remove(at: index!)
                     }
                 }
                 selectedCards.removeAll()
-                //                draw()
                 score += 1
                 return 1
             } else {
@@ -126,10 +132,6 @@ class GameSet {
     }
     
     static private func colorTest(card1: Card, card2: Card, card3: Card) -> Bool {
-        if card1 == card2 {
-            
-        }
-        
         if card1.color == card2.color && card2.color == card3.color {
             return true
         } else if card1.color != card2.color && card2.color != card3.color && card1.color != card3.color {
@@ -175,6 +177,10 @@ class GameSet {
         return false
     }
     
+    func shuffle() {
+        cardsOnTable.shuffle()
+    }
+    
     init() {
         for color in Card.Color.allValues {
             for fill in Card.Fill.allValues {
@@ -192,5 +198,14 @@ class GameSet {
 extension Array {
     mutating func getRandomElement() -> Element {
         return remove(at: Int(arc4random_uniform(UInt32(count - 1))))
+    }
+    
+    mutating func shuffle() {
+        for index in 0..<count {
+            let randomIndex = Int(arc4random_uniform(UInt32(count - 1)))
+            if index != randomIndex {
+                swapAt(index, randomIndex)
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ struct Constants {
         static let maxNumberOfCardsOnBoard = 24
         static let cardsToBeDealt = 3
         static let initialNumberOfCards = 12
+        static let totalNumberOfCards = 81
         static let numberOfCardsInSet = 3
         static let successfulSetScore = 1
         static let failedSetScore = -1

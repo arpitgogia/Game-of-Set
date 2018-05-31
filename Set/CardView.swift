@@ -45,6 +45,13 @@ class CardView: UIView {
         }
     }
     
+    var isHinted: Bool = false {
+        didSet {
+            setNeedsLayout()
+            setNeedsDisplay()
+        }
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setNeedsDisplay()
         setNeedsLayout()
@@ -165,7 +172,23 @@ class CardView: UIView {
             path.addClip()
         }
         setProperties(path: &path, fillStyle: fillStyle, color: color)
-        
+    }
+    
+    func select() {
+        isSelected = true
+    }
+    
+    func deselect() {
+        isSelected = false
+    }
+    
+    func hint() {
+        isHinted = true
+    }
+
+    // For the lack of a better word, lol
+    func dehint() {
+        isHinted = false
     }
     
     override func draw(_ rect: CGRect) {
@@ -179,7 +202,13 @@ class CardView: UIView {
             roundedRect.lineWidth = 5.0
             roundedRect.stroke()
         }
-        print(roundedRect.bounds)
+        
+        if isHinted {
+            UIColor.green.setStroke()
+            roundedRect.lineWidth = 5.0
+            roundedRect.stroke()
+        }
+        
         drawSymbols(parent: roundedRect.bounds, shape: shape, number: count, fillStyle: fillStyle, color: color)
     }
 }

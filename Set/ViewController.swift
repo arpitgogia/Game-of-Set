@@ -11,8 +11,8 @@ import UIKit
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private var game = GameSet()
-    private var selectedButtons = [UIButton]()
-    private var hintButtons = [UIButton]()
+    private var selectedCardViews = [CardView]()
+    private var hintCardViews = [CardView]()
     private var replaceableButtonIndices = [Int]()
     private lazy var grid = newGrid()
     private var cardViews = [CardView]()
@@ -32,36 +32,31 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @IBAction func deal3Button(_ sender: UIButton) {
-        if (game.cardsOnTable.count + Constants.Game.cardsToBeDealt <= Constants.Game.maxNumberOfCardsOnBoard) {
-            game.dealMore(Constants.Game.cardsToBeDealt)
-        } else if (Constants.Game.maxNumberOfCardsOnBoard - game.cardsOnTable.count > 0) {
-            game.dealMore(Constants.Game.maxNumberOfCardsOnBoard - game.cardsOnTable.count)
-        }
-        //        updateViewFromModel()
+    @IBAction func dealButton(_ sender: UIButton) {
+        dealMore()
     }
     
     @IBAction func newGameButton(_ sender: Any) {
         game = GameSet()
-        selectedButtons = [UIButton]()
+        selectedCardViews = [CardView]()
         replaceableButtonIndices = [Int]()
         scoreLabel.text = "Score: \(0)"
-        //        updateViewFromModel()
-        //        hideExtraCards()
+        updateViewFromModel()
     }
     
     @IBAction func hintButton(_ sender: UIButton) {
+        selectedCardViews.removeAll()
         let setFound = game.findSet()
+        updateViewFromModel()
         if setFound {
-//            updateHintButtons()
+            for card in game.hintSet {
+                let hintIndex = game.cardsOnTable.index(of: card)!
+                cardViews[hintIndex].hint()
+                hintCardViews.append(cardViews[hintIndex])
+            }
         }
     }
-
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        updateViewFromModel()
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViewFromModel()
@@ -91,34 +86,102 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         cardViews.append(cardView)
     }
     
+    private func getCardIndex(_ sender: UITapGestureRecognizer) -> Int {
+        for (index, card) in cardViews.enumerated() {
+            if card.isEqual(sender.view as! CardView) {
+                return index
+            }
+        }
+        return -1
+    }
+    
+    private func selectCard(_ index: Int) {
+        let cardView = cardViews[index]
+        
+        let scoreOfMove = game.chooseCard(at: index)
+        
+        if hintCardViews.count == Constants.Game.numberOfCardsInSet {
+            for card in hintCardViews {
+                card.dehint()
+            }
+            hintCardViews.removeAll()
+        }
+        
+        if selectedCardViews.contains(cardView) {
+            cardView.deselect()
+            selectedCardViews.remove(at: selectedCardViews.index(of: cardView)!)
+            return
+        }
+        
+        selectedCardViews.append(cardView)
+        cardView.select()
+        
+        
+        if selectedCardViews.count == Constants.Game.numberOfCardsInSet {
+            if scoreOfMove == Constants.Game.successfulSetScore {
+                for card in selectedCardViews {
+                    cardViews.remove(at: cardViews.index(of: card)!)
+                }
+                updateViewFromModel()
+            } else {
+                for card in selectedCardViews {
+                    card.deselect()
+                }
+            }
+            selectedCardViews.removeAll()
+        }
+    }
+    
     @objc private func tapCard(_ sender: UITapGestureRecognizer) {
         switch sender.state {
         case .ended:
-            let location = sender.location(in: cardGridView)
-            print(location)
-            for (index, card) in cardViews.enumerated() {
-                if card.bounds.contains(location) {
-                    print(index)
-                }
-            }
+            selectCard(getCardIndex(sender))
         default:
             print("Shit!")
         }
     }
     
-    @objc private func dealMore() {
-        
+    private func disableDeal() {
+        dealButton.isEnabled = false
+//        dealButton.titleLabel?.alpha = 0.2
     }
     
-    @objc private func shuffle() {
-        
+    private func enableDeal() {
+        dealButton.isEnabled = true
+        dealButton.titleLabel?.alpha = 1.0
+    }
+    
+    @objc private func dealMore() {
+        if game.cardDeck.count > 0 {
+            game.dealMore(min(abs(game.cardDeck.count - game.cardsOnTable.count), Constants.Game.cardsToBeDealt))
+            updateViewFromModel()
+        } else {
+            disableDeal()
+        }
+    }
+    
+    @objc private func shuffle(_ sender: UIRotationGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            game.shuffle()
+            updateViewFromModel()
+        default:
+            break
+        }
     }
     
     private func updateViewFromModel() {
         grid = newGrid()
         cardGridView.subviews.forEach({$0.removeFromSuperview()})
+        cardViews = [CardView]()
         for (index, card) in game.cardsOnTable.enumerated() {
             setCard(card: card, indexOf: index)
         }
+        if game.cardDeck.count == 0 {
+            disableDeal()
+        } else {
+            enableDeal()
+        }
+        scoreLabel.text = "Score: \(game.score)"
     }
 }
